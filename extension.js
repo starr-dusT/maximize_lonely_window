@@ -43,6 +43,7 @@ function checkAndFullScreenWindow() {
         if (monitorsWindows[monitorIndex].length === 1) {
             let window = monitorsWindows[monitorIndex][0];
             if (!window.meta_window.maximized_horizontally && !window.meta_window.maximized_vertically) {
+                Main.notify('Notification Title', 'Max!');
                 window.meta_window.maximize(Meta.MaximizeFlags.BOTH);
             }
         }
