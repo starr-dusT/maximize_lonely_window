@@ -10,7 +10,7 @@ function init() {}
 export default class maximizeLonleyWindow {
     enable() {
         windowTracker = Shell.WindowTracker.get_default();
-        activeWindowChangedId = global.display.connect('window-created', checkAndFullScreenWindow),
+        activeWindowChangedId = global.display.connect('window-created', checkAndFullScreenWindow);
     }
 
     disable() {
