@@ -12,11 +12,13 @@ export default class maximizeLonleyWindow {
         windowTracker = Shell.WindowTracker.get_default();
         activeWindowChangedId = windowTracker.connect('notify::focus-app', checkAndFullScreenWindow);
         activeWorkspaceChangedId = global.window_manager.connect('switch-workspace', checkAndFullScreenWindow);
+        keybindingSignalId = global.display.connect('keybinding', checkAndFullScreenWindow);
     }
 
     disable() {
         windowTracker.disconnect(activeWindowChangedId);
         global.window_manager.disconnect(activeWorkspaceChangedId);
+        global.display.disconnect(keybindingSignalId);
         windowTracker = null;
     }
 }
