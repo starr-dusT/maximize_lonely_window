@@ -9,14 +9,11 @@ function init() {}
 
 export default class maximizeLonleyWindow {
     enable() {
-        windowTracker = Shell.WindowTracker.get_default();
         activeWindowChangedId = global.display.connect('window-created', checkAndFullScreenWindow);
     }
 
     disable() {
-        windowTracker.disconnect(activeWindowChangedId);
-        global.window_manager.disconnect(activeWorkspaceChangedId);
-        global.display.disconnect(keybindingSignalId);
+        global.display.disconnect(activeWindowChangedId);
         windowTracker = null;
     }
 }
