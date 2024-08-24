@@ -10,9 +10,7 @@ function init() {}
 export default class maximizeLonleyWindow {
     enable() {
         windowTracker = Shell.WindowTracker.get_default();
-        activeWindowChangedId = windowTracker.connect('notify::focus-app', checkAndFullScreenWindow);
-        activeWorkspaceChangedId = global.window_manager.connect('switch-workspace', checkAndFullScreenWindow);
-        keybindingSignalId = global.display.connect('keybinding', checkAndFullScreenWindow);
+        activeWindowChangedId = global.display.connect('window-created', checkAndFullScreenWindow),
     }
 
     disable() {
@@ -43,7 +41,6 @@ function checkAndFullScreenWindow() {
         if (monitorsWindows[monitorIndex].length === 1) {
             let window = monitorsWindows[monitorIndex][0];
             if (!window.meta_window.maximized_horizontally && !window.meta_window.maximized_vertically) {
-                Main.notify('Notification Title', 'Max!');
                 window.meta_window.maximize(Meta.MaximizeFlags.BOTH);
             }
         }
